@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CompanyTrends</title>
+
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css">
+
+</head>
+<body>
+
+    <header class="site-header">
+
+        <div class="header-left">
+    
+            <div class="site-title">
+                <span class="company-word">Company</span><span class="trends-word">Trends</span>
+            </div>
+    
+            <div class="header-page-title">
+                Explore Company Financials
+            </div>
+    
+        </div>
+    
+        <div class="header-right">
+    
+            <button class="header-button" id="shareButton">
+                Share
+            </button>
+    
+            <button class="header-button" id="aboutButton">
+                About
+            </button>
+    
+        </div>
+    
+    </header>
+
+    <main class="container">
+
+        <!-- Search Area -->
+        <div class="search-section">
+
+            <!-- Selected companies appear here -->
+            <div id="selectedCompanies"></div>
+
+            <!-- Add Comparison / Search -->
+            <div class="search-wrapper">
+
+                <input
+                    type="text"
+                    id="companySearch"
+                    class="company-search"
+                    placeholder="Search a Company..."
+                    autocomplete="off"
+                >
+
+                <!-- Search suggestions will appear here -->
+                <div id="searchResults">
+
+                    <div id="searchResultsTitle">
+
+                        Suggestions
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>    
+
+        <!-- Financial Buttons -->
+
+        <div class="filters">   
+            <div class="button-group">
+
+                <button
+                    id="revenueButton"
+                    class="active"
+                >
+                    Revenue
+                </button>
+
+                <button
+                    id="netIncomeButton"
+                >
+                    Net Income
+                </button>
+
+            </div>
+
+            <button 
+                id="clearAllButton" 
+                class="clear-all-button">
+                    
+                Clear All
+            </button>
+
+            <div class="year-filter">
+
+                <span id="startYearLabel">2000</span>
+
+                <div id="yearSlider"></div>
+
+                <span id="endYearLabel">2026</span>
+
+            </div>
+
+        </div>    
+
+        <!-- Graph -->
+        <div class="graph-area">
+
+            <section class="graph-container">
+
+                <div class="graph-wrapper">
+
+                    <canvas id="financialChart"></canvas>
+
+                    <div id="emptyGraphMessage">
+
+                        <h2> </h2>
+
+                        <p>
+                            Search above or select a featured comparison to begin.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <aside class="recommendation-panel">
+
+                <h2 id="recommendationTitle" class="recommendation-title">
+
+                    Start Exploring
+                
+                </h2>
+                
+                <p id="recommendationSubtitle" class="recommendation-subtitle">
+                
+                    Discover interesting company comparisons.
+                
+                </p>
+
+                <div id="recommendationContent"></div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <!-- Chart, Dates, and JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.js"></script>
+    <script src="script.js"></script>
+    
+
+
+
+</body>
+</html>
