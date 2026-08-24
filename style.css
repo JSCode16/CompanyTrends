@@ -310,7 +310,7 @@ button{
 
     color:#666;
 
-    font-size:0.9rem;
+    font-size:.85rem;
 
     cursor:pointer;
 
@@ -375,7 +375,7 @@ button:active{
     background: #eceff3;
     color: #666;
 
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
 
     transition:
@@ -596,32 +596,89 @@ button:active{
    Mobile Design
 ------------------------------ */
 
-@media(max-width:700px){
+@media (max-width:700px){
 
-    h1{
+    body{ padding:0 0 24px; font-size:0.9rem; overflow-x:hidden; }
 
-        font-size:2.2rem;
+    .site-header{ height:auto; min-height:62px; padding:10px 14px; gap:10px; }
+    .header-left{ gap:0; min-width:0; }
+    .site-title{ font-size:1.2rem; letter-spacing:-0.5px; white-space:nowrap; }
+    .header-page-title{ display:none; }
+    .header-right{ gap:3px; flex-shrink:0; }
+    .header-button{ padding:7px 8px; font-size:0.8rem; }
 
+    .container{ width:calc(100% - 20px); max-width:none; margin-top:10px; }
+    h1{ font-size:2rem; margin-bottom:12px; }
+    .subtitle{ font-size:0.95rem; margin-bottom:18px; }
+
+    #companySelector{ flex-direction:column; gap:8px; }
+    .search-section{
+        display:flex !important;
+        flex-direction:column !important;
+        width:100%;
+        max-width:none;
+        gap:8px;
     }
-
-    .button-group{
-
-        flex-direction:column;
-        align-items:center;
-
+    
+    #selectedCompanies{
+        display:flex !important;
+        flex-direction:column !important;
+        width:100%;
+        gap:8px;
     }
+    .search-wrapper{ width:100%; height:48px; order:10; }
+    .company-search{ width:100%; height:48px; padding:13px 14px; font-size:0.9rem; }
 
-    button{
+    #searchResults{ width:100%; max-width:none; left:0; top:calc(100% + 6px); padding:5px; border-radius:9px; max-height:60vh; overflow-y:auto; }
+    .search-result{ padding:11px 12px; margin:4px; border-radius:8px; }
+    .search-name{ font-size:0.9rem; }
+    .search-subtitle{ font-size:0.75rem; margin-top:3px; }
 
-        width:220px;
-
+    .company-chip{
+        width:100% !important;
+        max-width:none !important;
+        height:44px;
+        min-height:44px;
+        box-sizing:border-box;
     }
+    .company-info{ min-width:0; gap:7px; overflow:hidden; }
+    .company-info span{ text-align:left; }
+    .company-color-dot{ width:9px; height:9px; }
+    .chip-actions{ flex-shrink:0; }
+    .grab-handle{ font-size:15px; padding:3px; }
+    .remove-button{ padding:3px; }
 
-    .graph-container{
+    .edit-search-wrapper{ width:100%; height:100%; }
+    .edit-search-box{ width:100%; height:100%; padding:12px 13px; font-size:0.9rem; }
+    .edit-search-results{ top:calc(100% + 6px); max-height:60vh; overflow-y:auto; }
 
-        padding:20px;
-
+    .filters{ width:100%; max-width:none; flex-direction:column; align-items:stretch; gap:10px; padding:16px 12px; margin:0 auto 10px; border-radius:14px; }
+    .button-group{ width:100%; justify-content:center; flex-direction:row; align-items:stretch; }
+    button{ width:auto; flex:1; min-height:36px; padding:7px 8px; font-size:0.9rem; }
+    .clear-all-button{ width:auto; flex:none; padding:7px 12px; font-size:0.9rem; }
+    .year-filter{
+        width:100%;
+        max-width:none !important;
+        margin-left:0 !important;
+        margin-top:8px !important;
+        gap:8px !important;
     }
+    #startYearLabel,#endYearLabel{ min-width:30px !important; font-size:0.75rem !important; }
+    #yearSlider{ min-width:0; }
+
+    .graph-area{ width:100%; }
+    .graph-container{ width:100%; height:210px; padding:14px; border-radius:14px; }
+    .graph-wrapper{ width:100%; height:100%; }
+    .graph-placeholder{ height:100%; border-radius:11px; font-size:0.95rem; }
+    .empty-icon{ font-size:2.2rem; margin-bottom:18px; }
+    #emptyGraphMessage h2{ font-size:1.2rem; }
+
+    .recommendation-panel{ position:static; width:100%; height:auto; margin-top:10px; padding:20px 16px; border-radius:14px; }
+    .recommendation-title{ font-size:0.95rem; }
+    .recommendation-subtitle{ font-size:0.85rem; }
+    .comparison-item,.suggestion-item{ padding:11px 0; }
+
+    .noUi-handle{ width:20px !important; height:20px !important; right:-11px !important; top:-7.5px !important; }
 
 }
 

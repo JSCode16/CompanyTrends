@@ -1288,21 +1288,67 @@ const chart = new Chart(ctx, {
             
                     tooltipEl.style.opacity = 1;
             
-                    tooltipEl.style.left =
+                    const pointX =
                         position.left +
                         window.pageXOffset +
-                        tooltipModel.caretX +
-                        "px";
+                        tooltipModel.caretX;
             
-                    tooltipEl.style.top =
+                    const pointY =
                         position.top +
                         window.pageYOffset +
-                        tooltipModel.caretY -
-                        tooltipEl.offsetHeight -
-                        10 +
+                        tooltipModel.caretY;
+            
+                    const tooltipWidth = tooltipEl.offsetWidth;
+            
+                    const tooltipHeight = tooltipEl.offsetHeight;
+            
+                    const screenWidth = window.innerWidth;
+            
+                    const gap = 10;
+            
+                    let tooltipLeft;
+            
+                    if(pointX > screenWidth / 2){
+            
+                        // Point is on the right half → tooltip goes left
+                        tooltipLeft =
+                            pointX -
+                            tooltipWidth -
+                            gap;
+            
+                    }else{
+            
+                        // Point is on the left half → tooltip goes right
+                        tooltipLeft =
+                            pointX +
+                            gap;
+            
+                    }
+            
+                    // Prevent the tooltip from going off either edge
+                    const minimumLeft = 8;
+            
+                    const maximumLeft =
+                        screenWidth -
+                        tooltipWidth -
+                        8;
+            
+                    tooltipLeft =
+                        Math.max(
+                            minimumLeft,
+                            Math.min(tooltipLeft, maximumLeft)
+                        );
+            
+                    tooltipEl.style.left =
+                        tooltipLeft + "px";
+            
+                    tooltipEl.style.top =
+                        pointY -
+                        tooltipHeight -
+                        gap +
                         "px";
                 }
-            }
+            },
 
         }
 
