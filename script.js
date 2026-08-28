@@ -219,17 +219,21 @@ function loadStateFromURL(){
 
 
     // Load year range
-    const parsedStart = Number(start);
-    const parsedEnd = Number(end);
+    if(start !== null && end !== null){
 
-    if(
-        Number.isInteger(parsedStart) &&
-        Number.isInteger(parsedEnd)
-    ){
-
-        startYear = Math.max(2000, parsedStart);
-        endYear = Math.min(2026, parsedEnd);
-
+        const parsedStart = Number(start);
+        const parsedEnd = Number(end);
+    
+        if(
+            Number.isInteger(parsedStart) &&
+            Number.isInteger(parsedEnd)
+        ){
+    
+            startYear = Math.max(2000, parsedStart);
+            endYear = Math.min(2026, parsedEnd);
+    
+        }
+    
     }
 
 }
