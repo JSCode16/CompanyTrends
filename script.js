@@ -60,7 +60,7 @@ const featuredComparisons = [
 
     {
         companies: ["PepsiCo", "Coca-Cola"],
-        teaser: "The Greatest Beverage Rivalry."
+        teaser: "The Beverage Rivalry."
     },
 
     {
@@ -103,6 +103,52 @@ const revenueButton = document.getElementById("revenueButton");
 const netIncomeButton = document.getElementById("netIncomeButton");
 
 const shareButton = document.getElementById("shareButton");
+
+const aboutButton = document.getElementById("aboutButton");
+
+const aboutOverlay = document.getElementById("aboutOverlay");
+
+const aboutClose = document.getElementById("aboutClose");
+
+
+// Open About modal
+aboutButton.addEventListener("click", function(){
+
+    aboutOverlay.classList.add("open");
+
+});
+
+
+// Close About modal
+aboutClose.addEventListener("click", function(){
+
+    aboutOverlay.classList.remove("open");
+
+});
+
+
+// Close when clicking outside the modal
+aboutOverlay.addEventListener("click", function(event){
+
+    if(event.target === aboutOverlay){
+
+        aboutOverlay.classList.remove("open");
+
+    }
+
+});
+
+
+// Close with Escape key
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        aboutOverlay.classList.remove("open");
+
+    }
+
+});
 
 shareButton.addEventListener("click", async function(){
 
