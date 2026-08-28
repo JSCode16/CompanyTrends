@@ -52,15 +52,7 @@ body{
 
 }
 
-/* Clean Finance Logo */
-
-/* Modern Data Logo */
-
-/* Friendly Explorer Logo */
-
-/* Friendly Explorer Logo */
-
-/* Friendly Explorer Logo */
+/* CompanyTrends Logo */
 
 .site-title{
 
@@ -367,7 +359,7 @@ button:active{
 
 .clear-all-button {
 
-    padding: 8px 16px;
+    padding: 8px 12px;
 
     border: none;
     border-radius: 10px;
@@ -513,7 +505,7 @@ button:active{
 
     font-size:.85rem;
 
-    line-height:1.2;
+    line-height:1.6;
 
 }
 
@@ -544,7 +536,7 @@ button:active{
 
     gap:9px;
 
-    padding:12px 0;
+    padding:14px 0;
 
     border-bottom:1px solid #eceff3;
 
@@ -606,6 +598,14 @@ button:active{
     .header-page-title{ display:none; }
     .header-right{ gap:3px; flex-shrink:0; }
     .header-button{ padding:7px 8px; font-size:0.8rem; }
+    #shareButton{
+        font-size:0;
+    }
+
+    #shareButton::after{
+        content:"Share";
+        font-size:0.8rem;
+    }
 
     .container{ width:calc(100% - 20px); max-width:none; margin-top:10px; }
     h1{ font-size:2rem; margin-bottom:12px; }

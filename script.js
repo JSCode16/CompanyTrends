@@ -86,6 +86,8 @@ fetch("data.json")
 
         console.log("Database loaded!");
 
+        initializeFromURL();
+
     });
 
 // Grab elements from the page
@@ -99,6 +101,138 @@ const searchWrapper = document.querySelector(".search-wrapper");
 // Metric Buttons
 const revenueButton = document.getElementById("revenueButton");
 const netIncomeButton = document.getElementById("netIncomeButton");
+
+const shareButton = document.getElementById("shareButton");
+
+shareButton.addEventListener("click", async function(){
+
+    const shareURL = createShareURL();
+
+    // Use the native share menu when available
+    if(navigator.share){
+
+        try{
+
+            await navigator.share({
+                title: "CompanyTrends",
+                text: "Check out this company comparison on CompanyTrends.",
+                url: shareURL
+            });
+
+        }catch(error){
+
+            // User cancelled the share menu
+            if(error.name !== "AbortError"){
+                console.error("Share failed:", error);
+            }
+
+        }
+
+        return;
+    }
+
+
+    // Otherwise, copy the URL to the clipboard
+    try{
+
+        await navigator.clipboard.writeText(shareURL);
+
+        const originalText = shareButton.textContent;
+
+        shareButton.textContent = "✓ Copied!";
+
+        setTimeout(function(){
+
+            shareButton.textContent = originalText;
+
+        }, 1500);
+
+    }catch(error){
+
+        console.error("Could not copy share URL:", error);
+
+    }
+
+});
+
+
+// Create a shareable URL from the current CompanyTrends state
+function createShareURL(){
+
+    const companyTickers = selectedCompanies
+        .map(company => company.ticker)
+        .join(",");
+
+    const params = new URLSearchParams();
+
+    if(companyTickers){
+        params.set("companies", companyTickers);
+    }
+
+    params.set("metric", currentMetric);
+    params.set("start", startYear);
+    params.set("end", endYear);
+
+    return window.location.origin + "?" + params.toString();
+
+}
+
+
+// Load CompanyTrends state from the URL
+function loadStateFromURL(){
+
+    const params = new URLSearchParams(window.location.search);
+
+    const companyTickers = params.get("companies");
+    const metric = params.get("metric");
+    const start = params.get("start");
+    const end = params.get("end");
+
+
+    // Load selected companies
+    if(companyTickers){
+
+        const tickers = companyTickers
+            .split(",")
+            .map(ticker => ticker.trim().toLowerCase());
+
+        selectedCompanies = tickers
+            .map(ticker =>
+                companyData.find(company =>
+                    String(company.ticker).toLowerCase() === ticker
+                )
+            )
+            .filter(company => company);
+
+
+        // Keep the 5-company limit
+        selectedCompanies =
+            selectedCompanies.slice(0, 5);
+    }
+
+
+    // Load metric
+    if(metric === "revenue" || metric === "netIncome"){
+
+        currentMetric = metric;
+    }
+
+
+    // Load year range
+    const parsedStart = Number(start);
+    const parsedEnd = Number(end);
+
+    if(
+        Number.isInteger(parsedStart) &&
+        Number.isInteger(parsedEnd)
+    ){
+
+        startYear = Math.max(2000, parsedStart);
+        endYear = Math.min(2026, parsedEnd);
+
+    }
+
+}
 
 function renderFeaturedComparisons(){
 
@@ -1406,6 +1540,42 @@ yearSlider.noUiSlider.on("change", function(values){
     drawChart();
 
 });
+
+function initializeFromURL(){
+
+    // Load saved state from the URL
+    loadStateFromURL();
+
+    // Update the company chips
+    updateSelectedCompanies();
+
+    // Update the metric buttons
+    if(currentMetric === "revenue"){
+
+        revenueButton.classList.add("active");
+        netIncomeButton.classList.remove("active");
+
+    }else{
+
+        netIncomeButton.classList.add("active");
+        revenueButton.classList.remove("active");
+
+    }
+
+    // Update the year slider
+    yearSlider.noUiSlider.set([
+        startYear,
+        endYear
+    ]);
+
+    // Update the year labels
+    startYearLabel.textContent = startYear;
+    endYearLabel.textContent = endYear;
+
+    // Draw the saved comparison
+    drawChart();
+
+}
 
 // Format large dollar amounts
 function formatMoney(value){
